@@ -63,6 +63,7 @@ module.exports = function(options) {
             'appx': './src/app/appx/appx.browser.ts',
             'device': './src/app/device/device.browser.ts',
             'customer': './src/app/customer/customer.browser.ts',
+            'consumable': './src/app/consumable/consumable.browser.ts',
         },
 
         /*
@@ -337,6 +338,17 @@ module.exports = function(options) {
                 chunksSortMode: 'dependency',
                 metadata: METADATA,
                 chunks: ['polyfills', 'vendor', 'customer'],
+                inject: 'head'
+            }),
+            new HtmlWebpackPlugin({
+                favicon: 'src/favicon.ico',
+                template: 'src/index.html',
+                filename: 'consumable.html',
+                title: METADATA.title,
+                bootDrct: '<consumables></consumables>',
+                chunksSortMode: 'dependency',
+                metadata: METADATA,
+                chunks: ['polyfills', 'vendor', 'consumable'],
                 inject: 'head'
             }),
 

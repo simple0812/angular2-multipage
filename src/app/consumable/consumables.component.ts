@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Params }   from '@angular/router';
+import { Params }   from '@angular/router';
 
 import { Consumable } from './consumable';
 import { ConsumableService } from './consumable.service';
@@ -25,8 +25,7 @@ export class ConsumablesComponent implements OnInit {
     public SelectedModel: Consumable = new Consumable();
 
     constructor(private http: Http,
-                private service: ConsumableService,
-                private route: ActivatedRoute) {
+                private service: ConsumableService) {
     }
 
     public search() {
@@ -129,12 +128,8 @@ export class ConsumablesComponent implements OnInit {
         .catch((err) => console.log(err.message || err));
     }
     public ngOnInit(): void {
-        this.route.params.forEach( (param: Params) => {
-            _.extend(this.params, param);
-        });
+       
         let opt = {pagesize: this.pageSize, pageindex: this.pageIndex};
-        _.extend(opt, this.params);
-
         this.service.page(opt)
         .then( (res) => {
                 this.consumables = res.json().result as  Consumable[];
