@@ -7,7 +7,7 @@ import { Consumable } from './consumable';
 import { ConsumableService } from './consumable.service';
 import * as QRCode from 'qrcode';
 import * as _ from 'underscore';
-import * as $ from 'jquery';
+import 'jquery';
 import 'bootstrap';
 
 @Component({

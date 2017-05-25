@@ -9,8 +9,7 @@ import { CookieModule } from 'ngx-cookie';
 import { AuthGuard } from '../shard/auth.guard';
 import { Routes, RouterModule, Router } from '@angular/router';
 
-import { HeaderComponent } from '../shard/app.header.component';
-import { FooterComponent } from '../shard/app.footer.component';
+import { ShardModule } from '../shard/shard.module';
 
 import { DevicesComponent } from './devices.component';
 import { DeviceService } from './device.service';
@@ -19,24 +18,23 @@ import { MyDeviceType } from './pipe';
 
 @NgModule({
     imports: [
-         HttpModule,
-            RouterModule,
-            BrowserModule,
-            FormsModule,
-            CommonModule,
-            FileUploadModule,
-            DeviceRoutingModule,
-            Ng2PaginationModule,
-            CookieModule.forRoot()
+        HttpModule,
+        ShardModule,
+        RouterModule,
+        BrowserModule,
+        FormsModule,
+        CommonModule,
+        FileUploadModule,
+        DeviceRoutingModule,
+        Ng2PaginationModule,
+        CookieModule.forRoot()
     ],
     exports: [],
     declarations: [
         DevicesComponent,
         MyDeviceType,
-        HeaderComponent,
-        FooterComponent
     ],
     providers: [DeviceService, AuthGuard],
-    bootstrap: [DevicesComponent, HeaderComponent]
+    bootstrap: [DevicesComponent]
 })
 export class DeviceModule { }

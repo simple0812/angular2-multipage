@@ -9,8 +9,7 @@ import { CookieModule } from 'ngx-cookie';
 import { AuthGuard } from '../shard/auth.guard';
 import { Routes, RouterModule, Router } from '@angular/router';
 
-import { HeaderComponent } from '../shard/app.header.component';
-import { FooterComponent } from '../shard/app.footer.component';
+import { ShardModule } from '../shard/shard.module';
 
 import { AppxRoutingModule } from './appx.routing';
 import { AppxService } from './appx.service';
@@ -18,6 +17,7 @@ import { AppxComponent } from './appx.component';
 
 @NgModule({
     imports: [
+        ShardModule,
         HttpModule,
         RouterModule,
         BrowserModule,
@@ -33,10 +33,8 @@ import { AppxComponent } from './appx.component';
     ],
     declarations: [
         AppxComponent,
-        HeaderComponent,
-        FooterComponent
     ],
     providers: [AppxService, AuthGuard],
-    bootstrap: [AppxComponent, HeaderComponent]
+    bootstrap: [AppxComponent]
 })
 export class AppxModule { }

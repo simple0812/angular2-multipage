@@ -1,10 +1,8 @@
 /**
  * @author: @AngularClass
  */
-
 const webpack = require('webpack');
 const helpers = require('./helpers');
-
 /*
  * Webpack Plugins
  */
@@ -58,12 +56,11 @@ module.exports = function(options) {
          */
         entry: {
             'polyfills': './src/polyfills.browser.ts',
-            // 'main': AOT ? './src/main.browser.aot.ts' : './src/main.browser.ts',
-            'hello': './src/hello.browser.ts',
-            'appx': './src/app/appx/appx.browser.ts',
-            'device': './src/app/device/device.browser.ts',
-            'customer': './src/app/customer/customer.browser.ts',
-            'consumable': './src/app/consumable/consumable.browser.ts',
+            'hello': AOT ? './src/hello.browser.aot.ts' : './src/hello.browser.ts',
+            'appx': AOT ? './src/app/appx/appx.browser.aot.ts' : './src/app/appx/appx.browser.ts',
+            'device': AOT ? './src/app/device/device.browser.aot.ts' : './src/app/device/device.browser.ts',
+            'customer': AOT ? './src/app/customer/customer.browser.aot.ts' : './src/app/customer/customer.browser.ts',
+            'consumable': AOT ? './src/app/consumable/consumable.browser.aot.ts' : './src/app/consumable/consumable.browser.ts',
         },
 
         /*

@@ -9,8 +9,7 @@ import { CookieModule } from 'ngx-cookie';
 import { AuthGuard } from '../shard/auth.guard';
 import { Routes, RouterModule, Router } from '@angular/router';
 
-import { HeaderComponent } from '../shard/app.header.component';
-import { FooterComponent } from '../shard/app.footer.component';
+import { ShardModule } from '../shard/shard.module';
 
 import { ConsumablesComponent } from './consumables.component';
 import { ConsumableService } from './consumable.service';
@@ -19,6 +18,7 @@ import { MyConsumableType } from './pipe';
 
 @NgModule({
     imports: [
+        ShardModule,
         HttpModule,
         RouterModule,
         BrowserModule,
@@ -33,10 +33,9 @@ import { MyConsumableType } from './pipe';
     declarations: [
         ConsumablesComponent,
         MyConsumableType,
-        HeaderComponent,
-        FooterComponent
+        
         ],
     providers: [ConsumableService, AuthGuard],
-    bootstrap: [ConsumablesComponent, HeaderComponent]
+    bootstrap: [ConsumablesComponent]
 })
 export class ConsumableModule { }

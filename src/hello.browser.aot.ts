@@ -1,11 +1,11 @@
 import { platformBrowser } from '@angular/platform-browser';
-import { decorateModuleRef } from '../../app/environment';
+import { decorateModuleRef } from './app/environment';
 
-import { DeviceModuleNgFactory } from '../compiled/src/app/device/device.module.ngfactory';
+import { ShardModuleNgFactory } from './compiled/src/app/shard/shard.module.ngfactory';
 
 export function main(): Promise<any> {
   return platformBrowser()
-    .bootstrapModuleFactory(DeviceModuleNgFactory)
+    .bootstrapModuleFactory(ShardModuleNgFactory)
     .then(decorateModuleRef)
     .catch((err) => console.error(err));
 }

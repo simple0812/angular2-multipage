@@ -6,8 +6,8 @@ import { Appx } from './appx';
 import { AppxService } from './appx.service';
 
 import * as bs from 'bootstrap';
-import * as $ from 'jquery';
 import * as _ from 'underscore';
+import 'jquery';
 import { FileUploader } from 'ng2-file-upload';
 
 @Component({
