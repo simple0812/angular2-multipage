@@ -3,14 +3,14 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
-import { AuthGuard } from './common/auth.guard';
+import { AuthGuard } from './shard/auth.guard';
 import { CookieModule } from 'ngx-cookie';
 
-import { NotFoundComponent } from './common/notfound.component';
+import { NotFoundComponent } from './shard/notfound.component';
 
-import { HeaderComponent } from './common/app.header.component';
-import { FooterComponent } from './common/app.footer.component';
-import { HelloComponent } from './common/hello.component';
+import { HeaderComponent } from './shard/app.header.component';
+import { FooterComponent } from './shard/app.footer.component';
+import { HelloComponent } from './shard/hello.component';
 
 @NgModule({
     imports: [

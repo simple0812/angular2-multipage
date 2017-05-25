@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { AuthGuard } from './common/auth.guard';
+import { AuthGuard } from './shard/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/devices', pathMatch: 'full' },

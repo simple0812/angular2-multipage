@@ -1,6 +1,6 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { platformBrowser } from '@angular/platform-browser';
-import { HelloComponent } from './app/common/hello.component';
+import { HelloComponent } from './app/shard/hello.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule  } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
