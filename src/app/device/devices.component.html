@@ -78,7 +78,6 @@
                         <td class="col-xs-3">{{device.type | myDeviceType}}</td>
                         <td class="col-xs-3">
                             <a class="gap a-remove" href="javascript:void(0)" (click)="remove(device, $event)" id="{{device.id}}">删除</a>
-                            <a class="gap" [routerLink]="['/consumables', {deviceid: device.id}]">耗材</a>
                         </td>
                     </tr>
                 </tbody>

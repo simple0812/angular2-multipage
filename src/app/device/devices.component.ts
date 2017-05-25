@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { Headers, Response } from '@angular/http';
-import { ActivatedRoute, Params }   from '@angular/router';
+import { Params }   from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 import { Device } from './device';
@@ -24,9 +24,7 @@ export class DevicesComponent implements OnInit {
 
     public SelectedDevice: Device = new Device();
 
-    constructor(private service: DeviceService,
-                private route: ActivatedRoute) {
-    }
+    constructor(private service: DeviceService) { }
     public search() {
         this.pageIndex = 1;
         let opt = {pagesize: this.pageSize, pageindex: this.pageIndex, keyword: this.searchWord};
@@ -100,11 +98,7 @@ export class DevicesComponent implements OnInit {
             .catch((err) => console.log(err.message || err));
     }
     public ngOnInit(): void {
-        this.route.params.forEach( (param: Params) => {
-            _.extend(this.params, param);
-        });
         let opt = {pagesize: this.pageSize, pageindex: this.pageIndex};
-        _.extend(opt, this.params);
         this.service.page(opt)
             .then( (res) => {
                 this.devices = res.result as  Device[];

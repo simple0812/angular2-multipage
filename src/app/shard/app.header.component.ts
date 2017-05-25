@@ -14,26 +14,22 @@ import * as $ from 'jquery';
     <div class="navbar navbar-inverse navbar-fixed-top"  style="z-index: 4;">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand"  routerLink="/devices" style="margin-top:-4px;">
+                <a class="navbar-brand"  href="/devices" style="margin-top:-4px;">
                 <i class="glyphicon glyphicon-home"></i> 管理平台</a>
             </div>
             <div class="navbar-collapse">
                <ul class='nav navbar-nav'>
                    <li>
-                        <a routerLink="/devices" (click)='addClassx($event)' 
-                        routerLinkActive="active">设备</a>
+                        <a href="/devices" (click)='addClassx($event)'>设备</a>
                    </li>
                    <li>
-                        <a routerLink="/customers" (click)='addClassx($event)'  
-                        routerLinkActive="active">客户</a>
+                        <a href="/customers" (click)='addClassx($event)'>客户</a>
                    </li>
                    <li>
-                        <a routerLink="/consumables" (click)='addClassx($event)'  
-                        routerLinkActive="active">耗材</a>
+                        <a href="/consumables" (click)='addClassx($event)'>耗材</a>
                    </li>
                    <li>
-                        <a routerLink="/appx" (click)='addClassx($event)'  
-                        routerLinkActive="active">客户端升级</a>
+                        <a href="/appx" (click)='addClassx($event)'>客户端升级</a>
                    </li>
                </ul>
                 <ul class="nav navbar-nav navbar-right" *ngIf='name'>
@@ -52,7 +48,7 @@ import * as $ from 'jquery';
 })
 export class HeaderComponent implements OnInit, AfterContentChecked {
     public name: string;
-    constructor( private http: Http, private _service: CookieService, private router: Router) {
+    constructor( private http: Http, private _service: CookieService) {
     }
 
     public addClassx(evt: any) {
@@ -61,7 +57,7 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
     }
     public logout() {
         this.http.get('/api/logout').toPromise().then((res) => {
-            this.router.navigate(['/login']);
+            location.href = '/login';
         }).catch((err) => {
             console.log(err.message);
         });

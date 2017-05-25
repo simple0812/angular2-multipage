@@ -31,7 +31,7 @@
                             <input class="form-control" id="txtName" name='name' type="text" required maxlength="50" [(ngModel)]="SelectedModel.name" />
                         </div>
                         <div [hidden]="xform.controls.name?.valid" class="alert alert-danger">
-                            <p *ngIf="xform.controls.name?.errors?.required"  class='name-required-err'>* 必填项</p>
+                            <p *ngIf="xform.controls.name?.errors?.required" class='name-required-err'>* 必填项</p>
                         </div>
                         <div class="input-group col-xs-12 bottom-gap">
                             <span class="input-group-addon addon-width-4 " style="width:95px; text-align:right;">描述：</span>
@@ -114,3 +114,4 @@
         <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
     </div>
 </div>
+<footer></footer>

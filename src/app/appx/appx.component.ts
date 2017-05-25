@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
-import { ActivatedRoute, Params }   from '@angular/router';
+import { Params }   from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Appx } from './appx';
 import { AppxService } from './appx.service';
@@ -58,7 +58,7 @@ export class AppxComponent implements OnInit {
         itemAlias: 'uploadedfile'
     });
 
-    constructor( private http: Http, private service: AppxService, private route: ActivatedRoute) {
+    constructor( private http: Http, private service: AppxService) {
     }
 
     public selectedFileOnChanged(event: any) {

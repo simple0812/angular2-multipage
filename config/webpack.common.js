@@ -59,7 +59,10 @@ module.exports = function(options) {
         entry: {
             'polyfills': './src/polyfills.browser.ts',
             'main': AOT ? './src/main.browser.aot.ts' : './src/main.browser.ts',
-            'hello': './src/hello.browser.ts'
+            'hello': './src/hello.browser.ts',
+            'appx': './src/app/appx/appx.browser.ts',
+            'device': './src/app/device/device.browser.ts',
+            'customer': './src/app/customer/customer.browser.ts',
         },
 
         /*
@@ -277,15 +280,6 @@ module.exports = function(options) {
                 //   { from: 'src/meta'}
             ]),
 
-
-            /*
-             * Plugin: HtmlWebpackPlugin
-             * Description: Simplifies creation of HTML files to serve your webpack bundles.
-             * This is especially useful for webpack bundles that include a hash in the filename
-             * which changes every compilation.
-             *
-             * See: https://github.com/ampedandwired/html-webpack-plugin
-             */
             new HtmlWebpackPlugin({
                 favicon: 'src/favicon.ico',
                 template: 'src/index.html',
@@ -307,6 +301,42 @@ module.exports = function(options) {
                 chunksSortMode: 'dependency',
                 metadata: METADATA,
                 chunks: ['polyfills', 'vendor', 'hello'],
+                inject: 'head'
+            }),
+
+            new HtmlWebpackPlugin({
+                favicon: 'src/favicon.ico',
+                template: 'src/index.html',
+                filename: 'appx.html',
+                title: METADATA.title,
+                bootDrct: '<appx></appx>',
+                chunksSortMode: 'dependency',
+                metadata: METADATA,
+                chunks: ['polyfills', 'vendor', 'appx'],
+                inject: 'head'
+            }),
+
+            new HtmlWebpackPlugin({
+                favicon: 'src/favicon.ico',
+                template: 'src/index.html',
+                filename: 'device.html',
+                title: METADATA.title,
+                bootDrct: '<devices></devices>',
+                chunksSortMode: 'dependency',
+                metadata: METADATA,
+                chunks: ['polyfills', 'vendor', 'device'],
+                inject: 'head'
+            }),
+
+            new HtmlWebpackPlugin({
+                favicon: 'src/favicon.ico',
+                template: 'src/index.html',
+                filename: 'customer.html',
+                title: METADATA.title,
+                bootDrct: '<customers></customers>',
+                chunksSortMode: 'dependency',
+                metadata: METADATA,
+                chunks: ['polyfills', 'vendor', 'customer'],
                 inject: 'head'
             }),
 
