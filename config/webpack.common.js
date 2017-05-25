@@ -58,7 +58,7 @@ module.exports = function(options) {
          */
         entry: {
             'polyfills': './src/polyfills.browser.ts',
-            'main': AOT ? './src/main.browser.aot.ts' : './src/main.browser.ts',
+            // 'main': AOT ? './src/main.browser.aot.ts' : './src/main.browser.ts',
             'hello': './src/hello.browser.ts',
             'appx': './src/app/appx/appx.browser.ts',
             'device': './src/app/device/device.browser.ts',
@@ -241,12 +241,32 @@ module.exports = function(options) {
                 name: 'polyfills',
                 chunks: ['polyfills']
             }),
-            // This enables tree shaking of the vendor modules
             new CommonsChunkPlugin({
-                name: 'vendor',
-                chunks: ['main'],
-                minChunks: module => /node_modules/.test(module.resource)
+                name: 'hello',
+                chunks: ['hello']
             }),
+            new CommonsChunkPlugin({
+                name: 'appx',
+                chunks: ['appx']
+            }),
+            new CommonsChunkPlugin({
+                name: 'device',
+                chunks: ['device']
+            }),
+            new CommonsChunkPlugin({
+                name: 'customer',
+                chunks: ['customer']
+            }),
+            new CommonsChunkPlugin({
+                name: 'consumable',
+                chunks: ['consumable']
+            }),
+            // This enables tree shaking of the vendor modules
+            // new CommonsChunkPlugin({
+            //     name: 'vendor',
+            //     chunks: ['main'],
+            //     minChunks: module => /node_modules/.test(module.resource)
+            // }),
             // Specify the correct order the scripts will be injected in
             new CommonsChunkPlugin({
                 name: ['polyfills', 'vendor'].reverse()
@@ -286,10 +306,10 @@ module.exports = function(options) {
                 template: 'src/index.html',
                 filename: 'index.html',
                 title: METADATA.title,
-                bootDrct: '<app></app>',
+                bootDrct: '<devices></devices>',
                 chunksSortMode: 'dependency',
                 metadata: METADATA,
-                chunks: ['polyfills', 'vendor', 'main'],
+                chunks: ['polyfills', 'vendor', 'device'],
                 inject: 'head'
             }),
 
@@ -328,6 +348,8 @@ module.exports = function(options) {
                 chunks: ['polyfills', 'vendor', 'device'],
                 inject: 'head'
             }),
+
+
 
             new HtmlWebpackPlugin({
                 favicon: 'src/favicon.ico',
