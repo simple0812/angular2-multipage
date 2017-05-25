@@ -1,0 +1,116 @@
+<header></header>
+<div class="modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="createUserModalLabel" aria-hidden="true" style="margin-top: 120px;" modal-dialog>
+    <div class="modal-dialog" style="margin-top: 80px;">
+        <div class="modal-content">
+            <form #xform="ngForm" (ngSubmit)="create(xform,close)" novalidate>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="createUserModalLabel">创建</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="input-group col-xs-12 bottom-gap">
+                            <span class="input-group-addon addon-width-4 " style="width:95px; text-align:right;">编号：</span>
+                            <input class="form-control" id="txtId" name='serialNumber' required maxlength="50" minlength="10" type="text" [(ngModel)]="SelectedModel.serialNumber" />
+                        </div>
+                        <div [hidden]="xform.controls.serialNumber?.valid" class="alert alert-danger">
+                            <p *ngIf="xform.controls.serialNumber?.errors?.required" class='id-required-err'>* 必填项</p>
+                            <p *ngIf="xform.controls.serialNumber?.errors?.minlength" class='id-length-err'>* 长度必须大于10个字符</p>
+                        </div>
+                        <div class="input-group col-xs-12 bottom-gap">
+                            <span class="input-group-addon addon-width-4 " style="width:95px; text-align:right;">类型：</span>
+                            <select class="form-control" name='type' [(ngModel)]="SelectedModel.type">
+                                <option value="1">反应器</option>
+                                <option value="2">清洗机</option>
+                                <option value="3">灌流反应器</option>
+                                <option value="9">通用</option>
+                            </select>
+                        </div>
+                        <div class="input-group col-xs-12 bottom-gap">
+                            <span class="input-group-addon addon-width-4 " style="width:95px; text-align:right;">名称：</span>
+                            <input class="form-control" id="txtName" name='name' type="text" required maxlength="50" [(ngModel)]="SelectedModel.name" />
+                        </div>
+                        <div [hidden]="xform.controls.name?.valid" class="alert alert-danger">
+                            <p *ngIf="xform.controls.name?.errors?.required"  class='name-required-err'>* 必填项</p>
+                        </div>
+                        <div class="input-group col-xs-12 bottom-gap">
+                            <span class="input-group-addon addon-width-4 " style="width:95px; text-align:right;">描述：</span>
+                            <input class="form-control" id="txtDesc" name='description' type="text" maxlength="50" minlength="5" [(ngModel)]="SelectedModel.description" />
+                        </div>
+                        <div [hidden]="xform.controls.description?.valid" class="alert alert-danger">
+                            <p *ngIf="xform.controls.description?.errors?.minlength" class='description-length-err'>* 长度必须大于5个字符</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary  col-xs-offset-6" id="btnSave" type="submit">保存</button>
+                    <button type="button" class="btn btn-default" #close data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div onselectstart="return false">
+    <div class="well well-sm">
+        <div class="container fixed-width">
+            <button type="button" class="btn btn-default gap" id="btnCreate" data-toggle="modal" (click)="openDialog()">
+                <span class="glyphicon glyphicon-plus"></span> 添加
+            </button>
+            <button type="button" class="btn btn-default gap" style="display: none" id="btnRemove" ng-click="removeBatch(this, $event.target)">
+                <span class="glyphicon glyphicon-trash"></span> 删除
+            </button>
+            <div class="col-xs-6 col-md-3 input-group pull-right searchPanel">
+                <input type="text" class="form-control" id="txtSearch" placeholder="请输入关键词" [(ngModel)]='searchWord' />
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default" id="btnSearch" (click)="search()">搜索</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="container fixed-width">
+        <h3 class="pageInfo"><img src="../../assets/images/header.png" />&nbsp;耗材</h3>
+        <div class="panel panel-default">
+            <table class="table table-striped" style="table-layout:fixed;word-wrap:break-word;" id="tblUses">
+                <thead class="thead-color">
+                    <tr>
+
+                        <th class="col-xs-2" style="cursor:pointer">
+                            名称
+                        </th>
+                        <th class="col-xs-2" style="cursor:pointer">
+                            编码
+                        </th>
+                        <th class="col-xs-2" style="cursor:pointer">
+                            类型
+                        </th>
+                        <th class="col-xs-3" style="cursor:pointer">
+                            描述
+                        </th>
+                        <th class="col-xs-1" style="cursor:pointer">
+                            使用次数
+                        </th>
+                        <th class="col-xs-3">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class='device-item' *ngFor="let consumable of consumables  | paginate: {
+                                                      itemsPerPage: pageSize,
+                                                      currentPage: pageIndex,
+                                                      totalItems: recordCount }">
+                        <td class="col-xs-2">{{consumable.name}}</td>
+                        <td class="col-xs-2">{{consumable.serialNumber}}</td>
+                        <td class="col-xs-2">{{consumable.type | myConsumableType}}</td>
+                        <td class="col-xs-3">{{consumable.description}}</td>
+                        <td class="col-xs-1">{{consumable.times || 0}}</td>
+                        <td class="col-xs-3">
+                            <a class="gap a-remove" href="javascript:void(0)" (click)="remove(consumable, $event)" id="{{consumable.id}}">删除</a>
+                            <a class="gap" href="javascript:void(0)" (click)="qr(consumable, $event)">生成二维码</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
+    </div>
+</div>

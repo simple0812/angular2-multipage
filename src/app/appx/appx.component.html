@@ -1,0 +1,44 @@
+<header></header>
+<div onselectstart="return false">
+    <div class="well well-sm">
+        <div class="container fixed-width">
+            <span class='btn btn-primary fileinput-button'>
+                <i class="glyphicon glyphicon-upload"></i>
+                <span>上传文件</span>
+            <input type="file" id='fileUpload' ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged($event)" style='width: 90px; height: 30px; display: block;' />
+            </span>
+        </div>
+    </div>
+    <div class="container fixed-width">
+        <div class="progress" *ngIf='isUploading'>
+            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': xprogress + '%' }"></div>
+        </div>
+        <h3 class="pageInfo"><img src="../../assets/images/header.png" />&nbsp;安装包</h3>
+        <div class="panel panel-default">
+            <table class="table table-striped" style="table-layout:fixed;word-wrap:break-word;" id="tblUses">
+                <thead class="thead-color">
+                    <tr>
+
+                        <th class="col-xs-4" style="cursor:pointer">
+                            名称
+                        </th>
+                        <th class="col-xs-4" style="cursor:pointer">
+                            创建时间
+                        </th>
+                        <th class="col-xs-3">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let device of devices">
+                        <td class="col-xs-4">{{device.name}}</td>
+                        <td class="col-xs-4">{{device.createTime}}</td>
+                        <td class="col-xs-3">
+                            <a class="gap" href="javascript:void(0)" (click)="remove(device, $event)">删除</a>
+                            <a class="gap" href="/appxs/{{device.name}}.zip">下载</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

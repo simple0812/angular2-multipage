@@ -1,0 +1,21 @@
+项目启动流程
+
+npm install -g typescript
+npm install -g webpack
+npm install -g protractor
+npm install -g karma
+npm install
+npm run webdriver:update
+
+
+npm start
+
+编译项目并测试是否可用
+npm run build
+npm run start:srv
+npm start 
+npm run test
+npm run ci:testall
+
+正式部署项目
+pm2 server/bin/www
