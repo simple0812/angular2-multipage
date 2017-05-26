@@ -31,7 +31,9 @@ import * as $ from 'jquery';
                </ul>
                 <ul class="nav navbar-nav navbar-right" *ngIf='name'>
 				 <li class="dropdown">
-				    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{name}}<b class="caret"></b></a>
+				    <a href="javascript:void(0)" 
+                        class="dropdown-toggle" 
+                        data-toggle="dropdown">{{name}}<b class="caret"></b></a>
 				 	<ul class="dropdown-menu">
 						<li><a (click)='logout()'>注销</a></li>
 					</ul>

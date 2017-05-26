@@ -4,11 +4,11 @@ import { Params }   from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Appx } from './appx';
 import { AppxService } from './appx.service';
+import { FileUploader } from 'ng2-file-upload';
 
-import * as bs from 'bootstrap';
 import * as _ from 'underscore';
 import 'jquery';
-import { FileUploader } from 'ng2-file-upload';
+import 'bootstrap';
 
 @Component({
     selector: 'appx',
