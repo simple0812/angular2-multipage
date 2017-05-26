@@ -7,12 +7,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppxComponent } from './appx.component';
 
 const routes: Routes = [
-    { path: 'appx', loadChildren: './appx.module#AppxModule', canActivate: [AuthGuard]},
-    { path: '', component: AppxComponent }
+    { path: '', component: AppxComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule],
 })
 export class AppxRoutingModule { }

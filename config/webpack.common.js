@@ -19,6 +19,8 @@ const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const ngcWebpack = require('ngc-webpack');
 
+var MultiPagePlugIn = require('./multipage-plugin');
+
 /*
  * Webpack Constants
  */
@@ -54,15 +56,9 @@ module.exports = function(options) {
          *
          * See: http://webpack.github.io/docs/configuration.html#entry
          */
-        entry: {
+        entry: MultiPagePlugIn.mergeEntry({
             'polyfills': './src/polyfills.browser.ts',
-            'hello': AOT ? './src/hello.browser.aot.ts' : './src/hello.browser.ts',
-            'appx': AOT ? './src/app/appx/appx.browser.aot.ts' : './src/app/appx/appx.browser.ts',
-            'account': AOT ? './src/app/account/account.browser.aot.ts' : './src/app/account/account.browser.ts',
-            'device': AOT ? './src/app/device/device.browser.aot.ts' : './src/app/device/device.browser.ts',
-            'customer': AOT ? './src/app/customer/customer.browser.aot.ts' : './src/app/customer/customer.browser.ts',
-            'consumable': AOT ? './src/app/consumable/consumable.browser.aot.ts' : './src/app/consumable/consumable.browser.ts',
-        },
+        }),
 
         /*
          * Options affecting the resolving of modules.
@@ -239,30 +235,6 @@ module.exports = function(options) {
                 name: 'polyfills',
                 chunks: ['polyfills']
             }),
-            new CommonsChunkPlugin({
-                name: 'hello',
-                chunks: ['hello']
-            }),
-            new CommonsChunkPlugin({
-                name: 'appx',
-                chunks: ['appx']
-            }),
-            new CommonsChunkPlugin({
-                name: 'device',
-                chunks: ['device']
-            }),
-            new CommonsChunkPlugin({
-                name: 'customer',
-                chunks: ['customer']
-            }),
-            new CommonsChunkPlugin({
-                name: 'consumable',
-                chunks: ['consumable']
-            }),
-            new CommonsChunkPlugin({
-                name: 'account',
-                chunks: ['account']
-            }),
             // This enables tree shaking of the vendor modules
             // new CommonsChunkPlugin({
             //     name: 'vendor',
@@ -312,79 +284,6 @@ module.exports = function(options) {
                 chunksSortMode: 'dependency',
                 metadata: METADATA,
                 chunks: ['polyfills', 'vendor', 'device'],
-                inject: 'head'
-            }),
-
-            new HtmlWebpackPlugin({
-                favicon: 'src/favicon.ico',
-                template: 'src/index.html',
-                filename: 'hello.html',
-                title: METADATA.title,
-                bootDrct: '<hello></hello>',
-                chunksSortMode: 'dependency',
-                metadata: METADATA,
-                chunks: ['polyfills', 'vendor', 'hello'],
-                inject: 'head'
-            }),
-
-            new HtmlWebpackPlugin({
-                favicon: 'src/favicon.ico',
-                template: 'src/index.html',
-                filename: 'appx.html',
-                title: METADATA.title,
-                bootDrct: '<appx></appx>',
-                chunksSortMode: 'dependency',
-                metadata: METADATA,
-                chunks: ['polyfills', 'vendor', 'appx'],
-                inject: 'head'
-            }),
-
-            new HtmlWebpackPlugin({
-                favicon: 'src/favicon.ico',
-                template: 'src/index.html',
-                filename: 'device.html',
-                title: METADATA.title,
-                bootDrct: '<devices></devices>',
-                chunksSortMode: 'dependency',
-                metadata: METADATA,
-                chunks: ['polyfills', 'vendor', 'device'],
-                inject: 'head'
-            }),
-
-
-
-            new HtmlWebpackPlugin({
-                favicon: 'src/favicon.ico',
-                template: 'src/index.html',
-                filename: 'customer.html',
-                title: METADATA.title,
-                bootDrct: '<customers></customers>',
-                chunksSortMode: 'dependency',
-                metadata: METADATA,
-                chunks: ['polyfills', 'vendor', 'customer'],
-                inject: 'head'
-            }),
-            new HtmlWebpackPlugin({
-                favicon: 'src/favicon.ico',
-                template: 'src/index.html',
-                filename: 'consumable.html',
-                title: METADATA.title,
-                bootDrct: '<consumables></consumables>',
-                chunksSortMode: 'dependency',
-                metadata: METADATA,
-                chunks: ['polyfills', 'vendor', 'consumable'],
-                inject: 'head'
-            }),
-
-            new HtmlWebpackPlugin({
-                favicon: 'src/favicon.ico',
-                template: 'src/index.html',
-                filename: 'account.html',
-                title: METADATA.title,
-                bootDrct: '<user></user>',
-                chunksSortMode: 'dependency',
-                metadata: METADATA,
-                chunks: ['polyfills', 'vendor', 'account'],
                 inject: 'head'
             }),
 
@@ -460,7 +359,7 @@ module.exports = function(options) {
                 resourceOverride: helpers.root('config/resource-override.js')
             })
 
-        ],
+        ].concat(MultiPagePlugIn.plugins),
 
         /*
          * Include polyfills or mocks for various node stuff

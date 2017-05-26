@@ -10,6 +10,7 @@ export class AuthGuard implements CanActivate {
         if (this._cookieService.get('name')) {
             return true;
         }
+        console.log(this._cookieService.get('name'));
         this.router.navigate(['/login']);
         return false;
     }
