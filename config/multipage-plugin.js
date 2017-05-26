@@ -28,7 +28,7 @@ var pages = [{
     dir: './src/app/appx'
 }, {
     name: 'account',
-    dir: '../src/app/account',
+    dir: './src/app/account',
     bootDrct: 'user'
 }, {
     name: 'device',
@@ -40,7 +40,7 @@ var pages = [{
     bootDrct: 'customers'
 }, {
     name: 'consumable',
-    dir: './src/app/appx',
+    dir: './src/app/consumable',
     bootDrct: 'consumables'
 }, ];
 
@@ -67,19 +67,6 @@ pages.forEach((page) => {
         inject: 'head'
     }));
 })
-
-
-
-var _entry = {
-    'hello': AOT ? './src/hello.browser.aot.ts' : './src/hello.browser.ts',
-    'appx': AOT ? './src/app/appx/appx.browser.aot.ts' : './src/app/appx/appx.browser.ts',
-    'account': AOT ? './src/app/account/account.browser.aot.ts' : './src/app/account/account.browser.ts',
-    'device': AOT ? './src/app/device/device.browser.aot.ts' : './src/app/device/device.browser.ts',
-    'customer': AOT ? './src/app/customer/customer.browser.aot.ts' : './src/app/customer/customer.browser.ts',
-    'consumable': AOT ? './src/app/consumable/consumable.browser.aot.ts' : './src/app/consumable/consumable.browser.ts',
-};
-
-
 
 module.exports = {
     entry: _entry,
