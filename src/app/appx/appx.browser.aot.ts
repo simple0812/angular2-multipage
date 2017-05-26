@@ -1,7 +1,7 @@
 import { platformBrowser } from '@angular/platform-browser';
-import { decorateModuleRef } from '../../app/environment';
+import { decorateModuleRef } from '../environment';
 
-import { AppxModuleNgFactory } from '../compiled/src/app/appx/appx.module.ngfactory';
+import { AppxModuleNgFactory } from '../../../compiled/src/app/appx/appx.module.ngfactory';
 
 export function main(): Promise<any> {
   return platformBrowser()

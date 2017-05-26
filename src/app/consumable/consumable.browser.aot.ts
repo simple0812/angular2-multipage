@@ -2,7 +2,7 @@ import { platformBrowser } from '@angular/platform-browser';
 import { decorateModuleRef } from '../environment';
 
 import { ConsumableModuleNgFactory } from 
-    '../compiled/src/app/consumable/consumable.module.ngfactory';
+    '../../../compiled/src/app/consumable/consumable.module.ngfactory';
 
 export function main(): Promise<any> {
   return platformBrowser()

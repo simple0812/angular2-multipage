@@ -1,11 +1,11 @@
 import { platformBrowser } from '@angular/platform-browser';
 import { decorateModuleRef } from '../environment';
 
-import { DeviceModuleNgFactory } from '../../../compiled/src/app/device/device.module.ngfactory';
+import { AccountModuleNgFactory } from '../../../compiled/src/app/account/account.module.ngfactory';
 
 export function main(): Promise<any> {
   return platformBrowser()
-    .bootstrapModuleFactory(DeviceModuleNgFactory)
+    .bootstrapModuleFactory(AccountModuleNgFactory)
     .then(decorateModuleRef)
     .catch((err) => console.error(err));
 }

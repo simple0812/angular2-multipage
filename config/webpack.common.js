@@ -58,6 +58,7 @@ module.exports = function(options) {
             'polyfills': './src/polyfills.browser.ts',
             'hello': AOT ? './src/hello.browser.aot.ts' : './src/hello.browser.ts',
             'appx': AOT ? './src/app/appx/appx.browser.aot.ts' : './src/app/appx/appx.browser.ts',
+            'account': AOT ? './src/app/account/account.browser.aot.ts' : './src/app/account/account.browser.ts',
             'device': AOT ? './src/app/device/device.browser.aot.ts' : './src/app/device/device.browser.ts',
             'customer': AOT ? './src/app/customer/customer.browser.aot.ts' : './src/app/customer/customer.browser.ts',
             'consumable': AOT ? './src/app/consumable/consumable.browser.aot.ts' : './src/app/consumable/consumable.browser.ts',
@@ -258,6 +259,10 @@ module.exports = function(options) {
                 name: 'consumable',
                 chunks: ['consumable']
             }),
+            new CommonsChunkPlugin({
+                name: 'account',
+                chunks: ['account']
+            }),
             // This enables tree shaking of the vendor modules
             // new CommonsChunkPlugin({
             //     name: 'vendor',
@@ -368,6 +373,18 @@ module.exports = function(options) {
                 chunksSortMode: 'dependency',
                 metadata: METADATA,
                 chunks: ['polyfills', 'vendor', 'consumable'],
+                inject: 'head'
+            }),
+
+            new HtmlWebpackPlugin({
+                favicon: 'src/favicon.ico',
+                template: 'src/index.html',
+                filename: 'account.html',
+                title: METADATA.title,
+                bootDrct: '<user></user>',
+                chunksSortMode: 'dependency',
+                metadata: METADATA,
+                chunks: ['polyfills', 'vendor', 'account'],
                 inject: 'head'
             }),
 

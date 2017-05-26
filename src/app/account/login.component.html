@@ -1,0 +1,43 @@
+<div class="pane mbxxl">
+    <div class="container">
+        <h1 class="h2 em-low txt-c" style="text-align:center;padding:20px;">
+            登录
+        </h1>
+        <div class="row">
+            <div class="col-xs-6 col-xs-offset-3">
+                <form #xform="ngForm" (ngSubmit)="login()" novalidate>
+                    <div class="form-group has-error">
+                        <div class="input-wrapper">
+                            <label for="txtName">名称：</label>
+                            <input class="form-control" name='name' id='txtName' type="text" required maxlength="50" minlength="4" [(ngModel)]="name" />
+                            <span *ngIf="xform.controls.name?.errors?.required" class="help-block has-error name-required-err">* 必填项</span>
+                            <span class="help-block has-error name-length-err" *ngIf="xform.controls.name?.errors?.minlength">* 长度必须大于4个字符</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group has-error">
+                        <div class="input-wrapper">
+                            <label for="txtPassword">密码：</label>
+                            <input class="form-control" name='password' id='txtPassword' type="password" required maxlength="50" minlength="4" [(ngModel)]="password" />
+                            <span *ngIf="xform.controls.password?.errors?.required" class="help-block has-error password-required-err">* 必填项</span>
+                            <span class="help-block has-error password-length-err" *ngIf="xform.controls.password?.errors?.minlength">* 长度必须大于4个字符</span>
+                        </div>
+                    </div>
+                    <div class="form-group has-error">
+                        <div class="input-wrapper">
+                            <span *ngIf="errMsg" class="help-block has-error">{{errMsg}}</span>
+                        </div>
+                    </div>
+
+                    <div style="text-align:center;">
+                        <button class="btn btn-highlight-1" style="width:100%;" id="btnSave" type="submit" [disabled]="!xform.valid">
+                           登录
+                        </button>
+                    </div>
+                </form>
+                <h5><span>Don't have an account?</span></h5>
+                <a class="btn btn-default btn-block" style="border-radius:20px;" routerLink="/singup">Create an Account</a>
+            </div>
+        </div>
+    </div>
+</div>
