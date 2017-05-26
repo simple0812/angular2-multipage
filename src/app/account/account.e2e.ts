@@ -2,7 +2,7 @@ import { browser, by, element } from 'protractor';
 
 describe('Account', () => {
     beforeEach(() => {
-        browser.get('/login/singup');
+        browser.get('/account.html#/singup');
     });
 
     it('should  name is not empty ', () => {
@@ -138,15 +138,12 @@ describe('Account', () => {
         element(by.name('contact')).sendKeys('18221754915');
         element(by.name('address')).clear();
         element(by.name('address')).sendKeys('test');
+        
+        element(by.id('btnSave')).click();
 
-        browser.getCurrentUrl().then((old) => {
-            element(by.id('btnSave')).click();
-
-            browser.getCurrentUrl().then((ret) => {
-                expect(ret).not.toEqual(old);
-            });
-        });
-        browser.sleep(2000);
+        let EC = browser.ExpectedConditions;
+        
+        browser.wait(EC.urlContains('/'), 2000); 
     });
 
 });

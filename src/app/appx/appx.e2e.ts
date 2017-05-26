@@ -4,7 +4,7 @@ import * as path from 'path';
 
 describe('Appx', () => {
     beforeEach(() => {
-        browser.get('/appx');
+        browser.get('/appx.html');
     });
 
     it('should can upload file', () => {

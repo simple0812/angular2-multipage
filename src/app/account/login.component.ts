@@ -26,7 +26,7 @@ export class LoginComponent {
     public login() {
         this.service.login({name: this.name, password: md5(this.password)}).then((ret) => {
             if (ret.code === 'success') {
-                this.router.navigate(['/']);
+                location.href = '/';
             } else {
                 this.errMsg = ret.message;
             }

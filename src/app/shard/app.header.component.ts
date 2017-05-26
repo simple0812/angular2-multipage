@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
     }
     public logout() {
         this.http.get('/api/logout').toPromise().then((res) => {
-            location.href = '/login';
+            location.href = '/account.html';
         }).catch((err) => {
             console.log(err.message);
         });

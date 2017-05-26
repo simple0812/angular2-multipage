@@ -43,7 +43,7 @@ export class AccountComponent {
 
         this.service.singup(model).then((ret) => {
             if (ret.code === 'success') {
-                this.router.navigate(['/']);
+                location.href = '/';
             } else {
                 this.errMsg = ret.message;
             }

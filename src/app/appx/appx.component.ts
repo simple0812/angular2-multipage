@@ -141,10 +141,10 @@ export class AppxComponent implements OnInit {
     }
     public ngOnInit(): void {
         this.service.page()
-            .then( (res) => {
-                this.devices = res.json().result as  Appx[];
-                this.recordCount = res.json().total;
-            })
-            .catch((err) => console.log(err.message || err));
-        }
+        .then( (res) => {
+            this.devices = res.json().result as  Appx[];
+            this.recordCount = res.json().total;
+        })
+        .catch((err) => console.log(err.message || err));
+    }
 }

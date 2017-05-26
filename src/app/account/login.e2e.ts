@@ -2,7 +2,7 @@ import { browser, by, element } from 'protractor';
 
 describe('Login', () => {
     beforeEach(() => {
-        browser.get('/login');
+        browser.get('/account.html#/login');
     });
 
     it('should  name is not empty ', () => {
@@ -72,14 +72,10 @@ describe('Login', () => {
         element(by.name('name')).sendKeys('test');
         element(by.name('password')).clear();
         element(by.name('password')).sendKeys('123456');
-
-        browser.getCurrentUrl().then((old) => {
-            element(by.id('btnSave')).click();
-
-            browser.getCurrentUrl().then((ret) => {
-                expect(ret).not.toEqual(old);
-            });
-        });
+        
+        element(by.id('btnSave')).click();
+        let EC = browser.ExpectedConditions;
+        browser.wait(EC.urlContains('/'), 2000); 
         browser.sleep(2000);
     });
 

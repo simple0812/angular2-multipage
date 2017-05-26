@@ -41,42 +41,12 @@ describe('App HeaderComponent', () => {
         });
     }));
     
-    let links: RouterLinkStubDirective[];
-    let linkDes: DebugElement[];
-    
     beforeEach(() => {
-    fixture.detectChanges();
-    
-    linkDes = fixture.debugElement
-        .queryAll(By.directive(RouterLinkStubDirective));
-    
-    links = linkDes
-        .map((de) => de.injector.get(RouterLinkStubDirective) as RouterLinkStubDirective);
+        fixture.detectChanges();
     });
     
     it('can instantiate it', () => {
         expect(comp).not.toBeNull();
-    });
-    
-    it('can get RouterLinks from template', () => {
-        expect(links.length).toBe(5, 'should have 5 links');
-        expect(links[0].linkParams).toBe('/devices', '1st link should go to devices');
-        expect(links[1].linkParams).toBe('/devices', '2st link should go to devices');
-        expect(links[2].linkParams).toBe('/customers', '3st link should go to customers');
-        expect(links[3].linkParams).toBe('/consumables', '4st link should go to consumables');
-        expect(links[4].linkParams).toBe('/appx', '5st link should go to appx');
-    });
-    
-    it('can click Heroes link in template', () => {
-        const heroesLinkDe = linkDes[2];
-        const heroesLink = links[2];
-        
-        expect(heroesLink.navigatedTo).toBeNull('link should not have navigated yet');
-        
-        heroesLinkDe.triggerEventHandler('click', heroesLinkDe);
-        fixture.detectChanges();
-        
-        expect(heroesLink.navigatedTo).toBe('/customers');
     });
     
     it('can get user info', () => {

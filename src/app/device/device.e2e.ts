@@ -2,10 +2,10 @@ import { browser, by, element } from 'protractor';
 
 describe('Device', () => {
     beforeEach(() => {
-        browser.get('/');
+        browser.get('/device.html');
         browser.manage().deleteAllCookies().then( () => {
             (browser.manage() as any).addCookie({name: 'name', value: 'test'}).then( () => {
-                browser.get('/');
+                browser.get('/device.html');
             }); 
         });
     });

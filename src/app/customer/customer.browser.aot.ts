@@ -1,7 +1,8 @@
 import { platformBrowser } from '@angular/platform-browser';
 import { decorateModuleRef } from '../environment';
 
-import { CustomerModuleNgFactory } from '../../../compiled/src/app/customer/customer.module.ngfactory';
+import { CustomerModuleNgFactory } from 
+  '../../../compiled/src/app/customer/customer.module.ngfactory';
 
 export function main(): Promise<any> {
   return platformBrowser()
