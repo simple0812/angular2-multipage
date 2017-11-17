@@ -102,6 +102,7 @@ module.exports = function(config) {
         browsers: [
             'Chrome'
         ],
+       
 
         customLaunchers: {
             ChromeTravisCi: {
